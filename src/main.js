@@ -1,7 +1,8 @@
 import './style.css';
 
-import heroBg from './assets/photos/need-perm-jesse-major-credit-pier-flag-capes.png?w=1800&format=webp';
-import heroBgSmall from './assets/photos/need-perm-jesse-major-credit-pier-flag-capes.png?w=900&format=webp';
+/** Hero pier scene — WebP via imagetools at build/dev (source: 16125918900_12c76e5549_o.jpg). */
+import heroPhotoLg from './assets/photos/16125918900_12c76e5549_o.jpg?w=1920&format=webp&quality=78';
+import heroPhotoSm from './assets/photos/16125918900_12c76e5549_o.jpg?w=960&format=webp&quality=78';
 
 import drone from './assets/photos/need-perm-jesse-major-credit-drone-circle.png?w=600;900;1400&format=webp&as=picture';
 import parade from './assets/photos/need-perm-jesse-major-credit-pier-parade.png?w=480;800;1200&format=webp&as=picture';
@@ -13,6 +14,9 @@ import panflute from './assets/photos/need-perm-jesse-major-credit-panflute.png?
 import red from './assets/photos/need-perm-jesse-major-credit-red.png?w=480;800;1200&format=webp&as=picture';
 import cityPier from './assets/photos/need-perm-visitpaweb-credit-city-pier-port-angeles-wa.jpg?w=600;1000;1600&format=webp&as=picture';
 
+/** When false, hero and inline photos stay wired in code but are not applied (CSS gradient hero). */
+const SHOW_PHOTOS = false;
+
 const yearEl = document.getElementById('year');
 if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
@@ -20,15 +24,9 @@ if (yearEl) {
 
 const heroBgEl = document.querySelector('[data-bg="hero"]');
 if (heroBgEl) {
-  heroBgEl.style.backgroundImage =
-    `image-set(url(${heroBg}) 1x, url(${heroBg}) 2x)`;
-  if (!CSS.supports('background-image', 'image-set(url("x") 1x)')) {
-    heroBgEl.style.backgroundImage = `url(${heroBg})`;
-  }
   const prefersSmallData = matchMedia('(prefers-reduced-data: reduce)').matches;
-  if (prefersSmallData) {
-    heroBgEl.style.backgroundImage = `url(${heroBgSmall})`;
-  }
+  const heroUrl = prefersSmallData ? heroPhotoSm : heroPhotoLg;
+  heroBgEl.style.setProperty('--hero-photo', `url("${heroUrl}")`);
 }
 
 const photoMap = {
@@ -43,17 +41,19 @@ const photoMap = {
   'city-pier': { pic: cityPier, sizes: '(max-width: 900px) 100vw, 700px' },
 };
 
-document.querySelectorAll('img[data-photo]').forEach((img) => {
-  const key = img.dataset.photo;
-  const entry = photoMap[key];
-  if (!entry) return;
-  const { pic, sizes } = entry;
-  if (pic.sources?.webp) img.srcset = pic.sources.webp;
-  img.sizes = sizes;
-  img.src = pic.img.src;
-  if (pic.img.w) img.width = pic.img.w;
-  if (pic.img.h) img.height = pic.img.h;
-});
+if (SHOW_PHOTOS) {
+  document.querySelectorAll('img[data-photo]').forEach((img) => {
+    const key = img.dataset.photo;
+    const entry = photoMap[key];
+    if (!entry) return;
+    const { pic, sizes } = entry;
+    if (pic.sources?.webp) img.srcset = pic.sources.webp;
+    img.sizes = sizes;
+    img.src = pic.img.src;
+    if (pic.img.w) img.width = pic.img.w;
+    if (pic.img.h) img.height = pic.img.h;
+  });
+}
 
 const toggle = document.querySelector('.nav-toggle');
 const nav = document.getElementById('primary-nav');

@@ -1,4 +1,12 @@
 @font-face {
+  font-family: 'Mort';
+  src: url('/fonts/mort-variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Coconat';
   src:
     url('/fonts/Coconat-Regular.woff2') format('woff2'),
@@ -57,10 +65,10 @@
   --accent-contrast: #ffffff;
   --focus: #004dff;
 
-  --sans: 'Source Sans 3', 'IBM Plex Sans', ui-sans-serif, system-ui,
-    -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --heading: 'Coconat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
-    Roboto, sans-serif;
+  --sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --heading: 'Mort', 'Coconat', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Roboto, sans-serif;
 
   --radius-sm: 6px;
   --radius-md: 12px;
@@ -139,7 +147,6 @@ h1,
 h2,
 h3 {
   font-family: var(--heading);
-  font-weight: 600;
   color: var(--text);
   line-height: 1.15;
   margin: 0 0 0.5em;
@@ -147,16 +154,20 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(2.25rem, 6vw, 4rem);
-  letter-spacing: -0.02em;
+  font-size: clamp(2.85rem, 8vw, 5.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 800;
 }
 
 h2 {
-  font-size: clamp(1.5rem, 3.2vw, 2.25rem);
+  font-size: clamp(1.65rem, 3.6vw, 2.55rem);
+  font-weight: 700;
 }
 
 h3 {
   font-size: 1.15rem;
+  font-weight: 600;
 }
 
 p {
@@ -169,7 +180,7 @@ p:last-child {
 
 .eyebrow {
   display: inline-block;
-  font-family: var(--sans);
+  font-family: var(--heading);
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.78rem;
@@ -197,15 +208,14 @@ p:last-child {
 
 .rainbow-bar {
   height: 6px;
-  background: linear-gradient(
-    to right,
-    var(--red) 0 16.66%,
-    var(--orange) 16.66% 33.33%,
-    var(--yellow) 33.33% 50%,
-    var(--green) 50% 66.66%,
-    var(--blue) 66.66% 83.33%,
-    var(--violet) 83.33% 100%
-  );
+  line-height: 0;
+}
+
+.rainbow-bar__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
 }
 
 .btn {
@@ -215,7 +225,7 @@ p:last-child {
   gap: 8px;
   padding: 12px 22px;
   border-radius: 999px;
-  font-family: var(--heading);
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
@@ -274,6 +284,12 @@ p:last-child {
   width: 14px;
   height: 14px;
   opacity: 0.7;
+}
+
+.btn__arrow {
+  margin-left: 0.2em;
+  opacity: 0.75;
+  flex-shrink: 0;
 }
 
 .site-header {
@@ -351,6 +367,7 @@ p:last-child {
   border-radius: 999px;
   color: var(--text);
   text-decoration: none;
+  font-family: var(--heading);
   font-weight: 500;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
@@ -439,15 +456,46 @@ p:last-child {
   inset: 0;
   z-index: 0;
   background-color: #1a1525;
+  background-image: linear-gradient(
+    155deg,
+    #14101f 0%,
+    #1e1630 22%,
+    color-mix(in srgb, var(--violet) 42%, #1a1525) 48%,
+    #152a38 72%,
+    color-mix(in srgb, var(--blue) 38%, #121018) 100%
+  );
   background-size: cover;
   background-position: center 35%;
   background-repeat: no-repeat;
+}
+
+/* Hero photo + white wash (see main.js); scrims on ::after still tune contrast */
+.hero__bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.18) 45%,
+      rgba(255, 255, 255, 0.1) 100%
+    ),
+    var(--hero-photo, none);
+  background-size: cover, cover;
+  background-position: center 35%, center 35%;
+  background-repeat: no-repeat, no-repeat;
+  opacity: 0.62;
+  filter: brightness(1.12) contrast(0.96) saturate(0.92);
+  pointer-events: none;
 }
 
 .hero__bg::after {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
     linear-gradient(
       180deg,
@@ -476,7 +524,7 @@ p:last-child {
   position: absolute;
   inset: 0;
   z-index: 1;
-  opacity: 0.35;
+  opacity: 0.14;
   pointer-events: none;
   mix-blend-mode: screen;
 }
@@ -498,6 +546,7 @@ p:last-child {
 }
 
 .hero__lede {
+  font-family: var(--sans);
   font-size: clamp(1.1rem, 1.7vw, 1.3rem);
   color: rgba(255, 255, 255, 0.88);
   max-width: 58ch;
@@ -538,6 +587,7 @@ p:last-child {
 }
 
 .section__lede {
+  font-family: var(--sans);
   font-size: 1.1rem;
   color: var(--text-muted);
   max-width: 60ch;
@@ -546,6 +596,7 @@ p:last-child {
 
 .prose {
   max-width: 65ch;
+  font-family: var(--sans);
 }
 
 .prose p {
@@ -757,7 +808,9 @@ figure {
 }
 
 figcaption {
+  font-family: var(--sans);
   font-size: 0.78rem;
+  font-weight: 400;
   color: var(--text-muted);
   margin-top: 8px;
   text-align: left;
@@ -899,6 +952,7 @@ figcaption {
   color: rgba(255, 255, 255, 0.92);
   border-radius: 999px;
   font-size: 0.72rem;
+  font-weight: 500;
   letter-spacing: 0.04em;
   backdrop-filter: blur(4px);
   margin: 0;
@@ -917,5 +971,11 @@ figcaption {
   .gallery__item--wide {
     grid-column: span 2;
   }
+}
+
+/* Inline festival/about photos hidden while SHOW_PHOTOS is off in main.js */
+.about__figure,
+.photo-strip {
+  display: none;
 }
 
