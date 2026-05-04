@@ -30,7 +30,7 @@ The repo is a Vite-built single-page site: **hero** (2026 date, Facebook RSVP), 
 
 | Item                                      | Status      | Notes                                                                                                      |
 | ----------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------- |
-| Buy top-level domains                     | Not started | Search ideas: [pawapride](https://domainr.com/?q=pawapride), [prideofpa](https://domainr.com/?q=prideofpa) |
+| Buy top-level domains                     | Done | prideofpa and prideonthepier .org |
 | Ship visible 1.0 pamphlet (core sections) | Done        | About + Festival + hero + footer; no separate About/Resources pages yet                                    |
 | Turn on inline/hero photos                | Not started | Set `SHOW_PHOTOS` in `src/main.js` when permissions are cleared                                            |
 | Uncomment Get involved / Gallery / Donate | Not started | Re-enable nav + footer “on this page” when content and backends are ready                                  |
