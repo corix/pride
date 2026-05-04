@@ -10,7 +10,6 @@ const fixImagetoolsContentType = () => ({
   configureServer(server) {
     server.middlewares.use((req, res, next) => {
       if (req.url && req.url.startsWith('/@imagetools/')) {
-        console.log('[ctype-fix] intercepting', req.url);
         const origSetHeader = res.setHeader.bind(res);
         res.setHeader = (name, value) => {
           if (
@@ -19,7 +18,6 @@ const fixImagetoolsContentType = () => ({
             typeof value === 'string' &&
             value.includes('undefined')
           ) {
-            console.log('[ctype-fix] rewriting', value, '-> image/webp');
             value = 'image/webp';
           }
           return origSetHeader(name, value);
