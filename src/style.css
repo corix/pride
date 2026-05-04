@@ -352,13 +352,15 @@ p:last-child {
   -webkit-text-fill-color: transparent;
   /* Edge separation without gray stroke muddying the gradient fill. */
   filter: drop-shadow(0 0.5px 0.6px rgb(31 27 46 / 0.22));
+  /* Extra box below glyphs so descenders + filter aren’t clipped (Mort / WebKit). */
+  padding-bottom: 0.12em;
 }
 
 .brand__name {
   font-family: var(--heading);
   font-weight: 600;
   font-size: 1.15rem;
-  line-height: 1.15;
+  line-height: 1.32;
 }
 
 .brand__sub {
@@ -630,6 +632,25 @@ p:last-child {
   color: #fff;
   max-width: var(--copy-measure);
   margin-bottom: 0.8em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0;
+  row-gap: 0.2em;
+}
+
+.hero__date-when,
+.hero__date-time {
+  white-space: nowrap;
+}
+
+.hero__date-sep {
+  flex-shrink: 0;
+  padding-inline: 0.35em;
+}
+
+.hero__date--stacked .hero__date-sep {
+  display: none;
 }
 
 .hero h1 {

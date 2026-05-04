@@ -22,6 +22,22 @@ if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
 }
 
+/** Hide the date/time bullet when the line breaks between date and time. */
+const heroDateEl = document.querySelector('.hero__date');
+if (heroDateEl) {
+  const whenEl = heroDateEl.querySelector('.hero__date-when');
+  const timeEl = heroDateEl.querySelector('.hero__date-time');
+  const syncHeroDateStacked = () => {
+    if (!(whenEl instanceof HTMLElement) || !(timeEl instanceof HTMLElement)) return;
+    const stacked = timeEl.offsetTop > whenEl.offsetTop;
+    heroDateEl.classList.toggle('hero__date--stacked', stacked);
+  };
+  const ro = new ResizeObserver(syncHeroDateStacked);
+  ro.observe(heroDateEl);
+  syncHeroDateStacked();
+  document.fonts?.ready.then(syncHeroDateStacked);
+}
+
 const heroBgEl = document.querySelector('[data-bg="hero"]');
 if (heroBgEl) {
   const prefersSmallData = matchMedia('(prefers-reduced-data: reduce)').matches;

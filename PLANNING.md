@@ -17,16 +17,23 @@ The organization, PA Pride, is a 501(c)(3) that can accept tax-deductible donati
 - Doesn't need a calendar (yet)
 - Not a community support portal (yet)
 
-## TODOS
-- Buy top level domains
-  - https://domainr.com/?q=pawapride
-  - https://domainr.com/?q=prideofpa
-- [x] Build site (1.0 — single-page pamphlet)
-- Set up donation payment processor
-- Set up web forms
-  - Sign up to volunteer
-  - Apply to be a vendor
-  - Sign up for newsletter
+## Current status (May 2026)
+
+The repo is a Vite-built single-page site: **hero** (2026 date, Facebook RSVP), **About**, and **Festival** are live with accessible navigation (skip link, mobile menu), progress-style stripe branding, and basic SEO/OG tags. **Get involved** (volunteer / vendor / newsletter CTAs), **gallery**, and **donate** blocks exist in `index.html` but are commented out; primary nav links to those sections are disabled. Inline festival photos are wired in `src/main.js` (responsive WebP via imagetools) but **`SHOW_PHOTOS` is `false`**, so the public view uses the CSS gradient hero and empty image slots until permissions and the flag are flipped. Footer **contact email** and **photo credits** lines are still commented placeholders.
+
+## TODOs
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Buy top-level domains | Not started | Search ideas: [pawapride](https://domainr.com/?q=pawapride), [prideofpa](https://domainr.com/?q=prideofpa) |
+| Ship visible 1.0 pamphlet (core sections) | Done | About + Festival + hero + footer; no separate About/Resources pages yet |
+| Turn on inline/hero photos | Not started | Set `SHOW_PHOTOS` in `src/main.js` when permissions are cleared |
+| Uncomment Get involved / Gallery / Donate | Not started | Re-enable nav + footer “on this page” when content and backends are ready |
+| Public contact email in footer | Not started | Replace commented `mailto` placeholder |
+| Donation payment processor | Not started | Wire Stripe, Donorbox, or similar; donate section is commented |
+| Volunteer signup form | Not started | Was stubbed in commented Get involved section |
+| Vendor application form | Not started | Same |
+| Newsletter signup | Not started | Same |
 
 ## Appendix
 
