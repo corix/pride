@@ -75,7 +75,7 @@
 
   /* Nav wordmark: saturated stops (light bands use vivid mid-tones, not grayed “shadow” hues). */
   --pride-text-gradient: linear-gradient(
-    90deg,
+    90deg in oklch,
     var(--prog-black) 0%,
     var(--prog-brown) 10%,
     #e6b800 20%,
@@ -543,7 +543,8 @@ p:last-child {
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  /* ~4px at full opacity; rest of mask alphas −0.02 vs prior; fade to 0 by ~97%. */
+  /* Same mask as before through 38% (covers the upper third); below that, fade to
+     transparent by ~half height instead of lingering to ~97%. */
   -webkit-mask-image: linear-gradient(
     180deg,
     #000 0,
@@ -556,17 +557,9 @@ p:last-child {
     rgba(0, 0, 0, 0.11) calc(4px + 15%),
     rgba(0, 0, 0, 0.065) calc(4px + 19%),
     rgba(0, 0, 0, 0.052) 38%,
-    rgba(0, 0, 0, 0.05) 48%,
-    rgba(0, 0, 0, 0.047) 55%,
-    rgba(0, 0, 0, 0.042) 62%,
-    rgba(0, 0, 0, 0.036) 69%,
-    rgba(0, 0, 0, 0.03) 75%,
-    rgba(0, 0, 0, 0.024) 81%,
-    rgba(0, 0, 0, 0.019) 86%,
-    rgba(0, 0, 0, 0.015) 90%,
-    rgba(0, 0, 0, 0.0125) 93%,
-    rgba(0, 0, 0, 0.011) 95%,
-    rgba(0, 0, 0, 0) 97%,
+    rgba(0, 0, 0, 0.03) 44%,
+    rgba(0, 0, 0, 0.014) 47%,
+    rgba(0, 0, 0, 0) 50%,
     rgba(0, 0, 0, 0) 100%
   );
   mask-image: linear-gradient(
@@ -581,17 +574,9 @@ p:last-child {
     rgba(0, 0, 0, 0.11) calc(4px + 15%),
     rgba(0, 0, 0, 0.065) calc(4px + 19%),
     rgba(0, 0, 0, 0.052) 38%,
-    rgba(0, 0, 0, 0.05) 48%,
-    rgba(0, 0, 0, 0.047) 55%,
-    rgba(0, 0, 0, 0.042) 62%,
-    rgba(0, 0, 0, 0.036) 69%,
-    rgba(0, 0, 0, 0.03) 75%,
-    rgba(0, 0, 0, 0.024) 81%,
-    rgba(0, 0, 0, 0.019) 86%,
-    rgba(0, 0, 0, 0.015) 90%,
-    rgba(0, 0, 0, 0.0125) 93%,
-    rgba(0, 0, 0, 0.011) 95%,
-    rgba(0, 0, 0, 0) 97%,
+    rgba(0, 0, 0, 0.03) 44%,
+    rgba(0, 0, 0, 0.014) 47%,
+    rgba(0, 0, 0, 0) 50%,
     rgba(0, 0, 0, 0) 100%
   );
   -webkit-mask-size: 100% 100%;
@@ -639,6 +624,17 @@ p:last-child {
   row-gap: 0.2em;
 }
 
+/* Forced second row: date, then time — no dot, no mid-line bullet. */
+.hero__date--stacked {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.hero__date--stacked .hero__date-sep {
+  display: none;
+}
+
 .hero__date-when,
 .hero__date-time {
   white-space: nowrap;
@@ -647,10 +643,6 @@ p:last-child {
 .hero__date-sep {
   flex-shrink: 0;
   padding-inline: 0.35em;
-}
-
-.hero__date--stacked .hero__date-sep {
-  display: none;
 }
 
 .hero h1 {
