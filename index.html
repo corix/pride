@@ -4,10 +4,432 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pride</title>
+    <meta
+      name="description"
+      content="PA Pride is a 501(c)(3) nonprofit in Port Angeles, Washington, host of the annual Pride on the Pier festival celebrating our 2SLGBTQIAA+ community."
+    />
+    <meta name="theme-color" content="#750787" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PA Pride — Pride on the Pier" />
+    <meta
+      property="og:description"
+      content="Port Angeles Pride: a 501(c)(3) nonprofit hosting the annual Pride on the Pier festival."
+    />
+    <meta property="og:image" content="/favicon.svg" />
+    <meta name="twitter:card" content="summary" />
+
+    <title>PA Pride — Pride on the Pier, Port Angeles, WA</title>
   </head>
   <body>
-    <div id="app"></div>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="#top" aria-label="PA Pride home">
+          <span class="brand__mark" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </span>
+          <span class="brand__text">
+            <span class="brand__name">PA Pride</span>
+          </span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-nav"
+          aria-label="Open menu"
+        >
+          <svg class="nav-toggle__icon" aria-hidden="true">
+            <use href="/icons.svg#menu-icon"></use>
+          </svg>
+        </button>
+
+        <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#festival">2026 Festival</a></li>
+<!--            <li><a href="#get-involved">Get Involved</a></li> -->
+<!--        <li><a href="#gallery">Gallery</a></li> -->
+<!--            <li><a class="primary-nav__cta" href="#donate">Donate</a></li> -->
+          </ul>
+        </nav>
+      </div>
+      <div class="rainbow-bar" aria-hidden="true"></div>
+    </header>
+
+    <main id="main">
+      <section id="top" class="hero" aria-labelledby="hero-title">
+        <div class="hero__bg" data-bg="hero" aria-hidden="true"></div>
+        <div class="hero__chevron" aria-hidden="true">
+          <svg viewBox="0 0 200 200" preserveAspectRatio="xMinYMid slice">
+            <polygon points="0,0 80,100 0,200" fill="#000" />
+            <polygon points="16,0 96,100 16,200" fill="#613915" />
+            <polygon points="32,0 112,100 32,200" fill="#e40303" />
+            <polygon points="48,0 128,100 48,200" fill="#ff8c00" />
+            <polygon points="64,0 144,100 64,200" fill="#ffed00" />
+            <polygon points="80,0 160,100 80,200" fill="#008026" />
+            <polygon points="96,0 176,100 96,200" fill="#004dff" />
+            <polygon points="112,0 192,100 112,200" fill="#750787" />
+          </svg>
+        </div>
+
+        <div class="hero__inner">
+          <p class="eyebrow">Annual festival · Port Angeles, WA</p>
+          <h1 id="hero-title">Pride on the Pier</h1>
+          <p class="hero__lede">
+            Save the date! Join a celebration of our 2SLGBTQIAA+ community on the Olympic
+            Peninsula hosted by PA Pride, a 501(c)(3) nonprofit.
+          </p>
+          <p class="hero__date">Saturday, June 13, 2026 • 1-5pm</p>
+          <!-- <div class="hero__actions">
+            <a
+              class="btn btn--primary"
+              href="#donate"
+              data-todo="donation-processor"
+            >
+              Donate
+            </a>
+            <a class="btn btn--ghost" href="#get-involved">Get involved</a>
+          </div> -->
+        </div>
+      </section>
+
+      <section id="about" class="section section--about" aria-labelledby="about-title">
+        <div class="section__inner about__grid">
+          <div class="about__text">
+            <p class="eyebrow">About</p>
+            <h2 id="about-title">Celebrating queer joy on the peninsula</h2>
+            <div class="prose">
+              <p>
+                PA Pride is a 501(c)(3) nonprofit organization based in Port
+                Angeles, Washington. We exist to build visibility, community,
+                and celebration for lesbian, gay, bisexual, transgender, queer,
+                intersex, asexual, two-spirit, and allied people across Clallam
+                County and the Olympic Peninsula.
+              </p>
+              <p>
+                Our flagship event is <strong>Pride on the Pier</strong>, a
+                free, family-friendly festival held each summer on the Port
+                Angeles waterfront. Donations to PA Pride are fully tax-deductible.
+              </p>
+            </div>
+          </div>
+          <figure class="about__figure">
+            <img
+              data-photo="drone-circle"
+              alt="Aerial view of Pride on the Pier attendees filling the Port Angeles City Pier"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Pride on the Pier &middot; photo by Jesse Major</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="festival" class="section section--alt" aria-labelledby="festival-title">
+        <div class="section__inner">
+          <p class="eyebrow">The festival</p>
+          <h2 id="festival-title">Pride on the Pier 2026</h2>
+          <div class="prose">
+            <p>
+              Pride on the Pier is a one-day, all-ages festival on the Port
+              Angeles City Pier featuring local performers, community
+              organizations, food, and vendors. It's free to attend and open to
+              everyone.
+            </p>
+          </div>
+          <div class="link-row">
+            <a
+              class="btn btn--ghost"
+              href="https://www.facebook.com/events/924895537022838/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg class="btn__icon" aria-hidden="true">
+                <use href="/icons.svg#facebook-icon"></use>
+              </svg>
+             Full event details
+              <svg class="btn__icon btn__icon--trail" aria-hidden="true">
+                <use href="/icons.svg#external-icon"></use>
+              </svg>
+            </a>
+            <a
+              class="btn btn--ghost"
+              href="https://www.facebook.com/profile.php?id=61574747745779"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg class="btn__icon" aria-hidden="true">
+                <use href="/icons.svg#facebook-icon"></use>
+              </svg>
+              Follow our page
+              <svg class="btn__icon btn__icon--trail" aria-hidden="true">
+                <use href="/icons.svg#external-icon"></use>
+              </svg>
+            </a>
+          </div>
+
+          <ul class="photo-strip" role="list">
+            <li>
+              <figure>
+                <img
+                  data-photo="pier-parade"
+                  alt="Community members marching with Pride and Progress flags near the Port Angeles pier"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>Parade &middot; Jesse Major</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <img
+                  data-photo="megaphone"
+                  alt="Marcher raising a megaphone overhead as the crowd walks behind them"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>On the march &middot; Jesse Major</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <img
+                  data-photo="drag-performance"
+                  alt="Drag performer in a vibrant rainbow gown on the Port Angeles City Pier"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>Performance, 2024 &middot; Blake McCabe</figcaption>
+              </figure>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- <section id="get-involved" class="section" aria-labelledby="involved-title">
+        <div class="section__inner">
+          <p class="eyebrow">Get involved</p>
+          <h2 id="involved-title">Join us at the pier</h2>
+          <p class="section__lede">
+            We run on volunteer energy and community support. Pick a way to
+            plug in.
+          </p>
+
+          <ul class="cards" role="list">
+            <li class="card">
+              <h3 class="card__title">Volunteer</h3>
+              <p class="card__body">
+                Help with setup, greeting, merch, safety, or teardown on
+                festival day. Shifts of all lengths.
+              </p>
+              <a
+                class="btn btn--primary card__cta"
+                href="#"
+                data-todo="form-volunteer"
+                aria-label="Sign up to volunteer (form coming soon)"
+              >
+                Sign up to volunteer
+              </a>
+              <p class="card__note">Form coming soon</p>
+            </li>
+            <li class="card">
+              <h3 class="card__title">Be a vendor</h3>
+              <p class="card__body">
+                Food vendors, artists, makers, and community orgs are welcome
+                to apply for a booth at Pride on the Pier.
+              </p>
+              <a
+                class="btn btn--primary card__cta"
+                href="#"
+                data-todo="form-vendor"
+                aria-label="Apply to be a vendor (form coming soon)"
+              >
+                Apply to vend
+              </a>
+              <p class="card__note">Application coming soon</p>
+            </li>
+
+            <li class="card">
+              <h3 class="card__title">Stay in the loop</h3>
+              <p class="card__body">
+                Get occasional email updates about the festival, volunteer
+                calls, and PA Pride news.
+              </p>
+              <a
+                class="btn btn--primary card__cta"
+                href="#"
+                data-todo="form-newsletter"
+                aria-label="Sign up for the newsletter (form coming soon)"
+              >
+                Join the newsletter
+              </a>
+              <p class="card__note">Signup coming soon</p>
+            </li>
+          </ul>
+        </div>
+      </section> -->
+
+      <section id="gallery" class="section section--alt" aria-labelledby="gallery-title">
+        <div class="section__inner">
+          <p class="eyebrow">Scenes from the pier</p>
+          <h2 id="gallery-title">Come as you are</h2>
+          <p class="section__lede">
+            Pride on the Pier is made up of neighbors, friends, family, and
+            four-legged companions. A few favorite moments from past years.
+          </p>
+          <ul class="gallery" role="list">
+            <li class="gallery__item gallery__item--tall">
+              <figure>
+                <img
+                  data-photo="bo"
+                  alt="Festival-goer raising a small rainbow flag in a crowd"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>Jesse Major</figcaption>
+              </figure>
+            </li>
+            <li class="gallery__item">
+              <figure>
+                <img
+                  data-photo="dog"
+                  alt="Small dog in a rainbow bandana being carried by its person"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>Jesse Major</figcaption>
+              </figure>
+            </li>
+            <li class="gallery__item">
+              <figure>
+                <img
+                  data-photo="panflute"
+                  alt="Musician in a wide-brimmed hat playing a pan flute"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>Jesse Major</figcaption>
+              </figure>
+            </li>
+            <li class="gallery__item gallery__item--tall">
+              <figure>
+                <img
+                  data-photo="red"
+                  alt="Attendee cheering and waving a rainbow flag in the crowd"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>Jesse Major</figcaption>
+              </figure>
+            </li>
+            <li class="gallery__item gallery__item--wide">
+              <figure>
+                <img
+                  data-photo="city-pier"
+                  alt="Port Angeles City Pier viewing tower at dusk over calm water"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>Port Angeles City Pier &middot; Visit Port Angeles</figcaption>
+              </figure>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <!-- Donate section removed for now
+      <section id="donate" class="section donate" aria-labelledby="donate-title">
+        <div class="section__inner donate__inner">
+          <div class="triangle" aria-hidden="true"></div>
+          <p class="eyebrow">Support PA Pride</p>
+          <h2 id="donate-title">Donate to keep Pride on the Pier free</h2>
+          <p class="section__lede">
+            Every dollar goes toward stages, sound, permits, safety, and
+            keeping the festival free and open to everyone. PA Pride is a
+            501(c)(3) nonprofit — donations are tax-deductible.
+          </p>
+          <div class="donate__actions"> 
+          -->
+            <!-- data-todo: donation-processor - wire to Stripe/Donorbox/etc. -->
+            <!-- D<a
+              class="btn btn--primary btn--large"
+              href="#"
+              data-todo="donation-processor"
+              aria-label="Donate to PA Pride (processor coming soon)"
+            >
+              <svg class="btn__icon" aria-hidden="true">
+                <use href="/icons.svg#heart-icon"></use>
+              </svg>
+              Donate
+            </a>
+            <p class="donate__note">Donation processor coming soon</p>
+          </div>
+        </div>
+      </section>
+      -->
+    </main>
+
+    <footer class="site-footer">
+      <div class="rainbow-bar" aria-hidden="true"></div>
+      <div class="site-footer__inner">
+        <div class="site-footer__col">
+          <p class="brand__name">PA Pride</p>
+          <p class="site-footer__meta">
+            A 501(c)(3) nonprofit<br />
+            Port Angeles, Washington
+          </p>
+        </div>
+
+        <div class="site-footer__col">
+          <h2 class="site-footer__heading">Connect</h2>
+          <ul class="site-footer__list" role="list">
+            <li>
+              <a
+                href="https://www.facebook.com/profile.php?id=61574747745779"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg class="btn__icon" aria-hidden="true">
+                  <use href="/icons.svg#facebook-icon"></use>
+                </svg>
+                Facebook
+              </a>
+            </li>
+            <li>
+              <!-- data-todo: real contact email when established -->
+              <!-- <a href="mailto:hello@papride.org" data-todo="contact-email">
+                <svg class="btn__icon" aria-hidden="true">
+                  <use href="/icons.svg#mail-icon"></use>
+                </svg>
+                hello@papride.org
+              </a> -->
+            </li>
+          </ul>
+        </div>
+
+        <!-- <div class="site-footer__col">
+          <h2 class="site-footer__heading">On this page</h2>
+          <ul class="site-footer__list" role="list">
+            <li><a href="#about">About</a></li>
+            <li><a href="#festival">Festival</a></li>
+            <li><a href="#get-involved">Get involved</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#donate">Donate</a></li>
+          </ul>
+        </div> -->
+      </div>
+      <div class="site-footer__fineprint">
+        <!-- <p class="site-footer__credits">
+          Photos by Jesse Major, Blake McCabe, and Visit Port Angeles. Used
+          with permission.
+        </p> -->
+        <p>&copy; <span id="year">2026</span> PA Pride. All rights reserved.</p>
+      </div>
+    </footer>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

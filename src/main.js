@@ -1,60 +1,86 @@
-import './style.css'
-import javascriptLogo from './assets/javascript.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import { setupCounter } from './counter.js'
+import './style.css';
 
-document.querySelector('#app').innerHTML = `
-<section id="center">
-  <div class="hero">
-    <img src="${heroImg}" class="base" width="170" height="179">
-    <img src="${javascriptLogo}" class="framework" alt="JavaScript logo"/>
-    <img src=${viteLogo} class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/main.js</code> and save to test <code>HMR</code></p>
-  </div>
-  <button id="counter" type="button" class="counter"></button>
-</section>
+import heroBg from './assets/photos/need-perm-jesse-major-credit-pier-flag-capes.png?w=1800&format=webp';
+import heroBgSmall from './assets/photos/need-perm-jesse-major-credit-pier-flag-capes.png?w=900&format=webp';
 
-<div class="ticks"></div>
+import drone from './assets/photos/need-perm-jesse-major-credit-drone-circle.png?w=600;900;1400&format=webp&as=picture';
+import parade from './assets/photos/need-perm-jesse-major-credit-pier-parade.png?w=480;800;1200&format=webp&as=picture';
+import megaphone from './assets/photos/need-perm-jesse-major-credit-megaphone.png?w=480;800;1200&format=webp&as=picture';
+import drag from './assets/photos/need-perm-blake-mccabe-credit-drag-performance-2024.jpg?w=480;800;1200&format=webp&as=picture';
+import bo from './assets/photos/need-perm-jesse-major-credit-bo.png?w=480;800;1200&format=webp&as=picture';
+import dog from './assets/photos/need-perm-jesse-major-credit-dog.png?w=480;800;1200&format=webp&as=picture';
+import panflute from './assets/photos/need-perm-jesse-major-credit-panflute.png?w=480;800;1200&format=webp&as=picture';
+import red from './assets/photos/need-perm-jesse-major-credit-red.png?w=480;800;1200&format=webp&as=picture';
+import cityPier from './assets/photos/need-perm-visitpaweb-credit-city-pier-port-angeles-wa.jpg?w=600;1000;1600&format=webp&as=picture';
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank">
-          <img class="logo" src=${viteLogo} alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-          <img class="button-icon" src="${javascriptLogo}" alt="">
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-      <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-      <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-      <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-    </ul>
-  </div>
-</section>
+const yearEl = document.getElementById('year');
+if (yearEl) {
+  yearEl.textContent = String(new Date().getFullYear());
+}
 
-<div class="ticks"></div>
-<section id="spacer"></section>
-`
+const heroBgEl = document.querySelector('[data-bg="hero"]');
+if (heroBgEl) {
+  heroBgEl.style.backgroundImage =
+    `image-set(url(${heroBg}) 1x, url(${heroBg}) 2x)`;
+  if (!CSS.supports('background-image', 'image-set(url("x") 1x)')) {
+    heroBgEl.style.backgroundImage = `url(${heroBg})`;
+  }
+  const prefersSmallData = matchMedia('(prefers-reduced-data: reduce)').matches;
+  if (prefersSmallData) {
+    heroBgEl.style.backgroundImage = `url(${heroBgSmall})`;
+  }
+}
 
-setupCounter(document.querySelector('#counter'))
+const photoMap = {
+  'drone-circle': { pic: drone, sizes: '(max-width: 900px) 100vw, 420px' },
+  'pier-parade': { pic: parade, sizes: '(max-width: 900px) 100vw, 340px' },
+  megaphone: { pic: megaphone, sizes: '(max-width: 900px) 100vw, 340px' },
+  'drag-performance': { pic: drag, sizes: '(max-width: 900px) 100vw, 340px' },
+  bo: { pic: bo, sizes: '(max-width: 900px) 100vw, 340px' },
+  dog: { pic: dog, sizes: '(max-width: 900px) 100vw, 340px' },
+  panflute: { pic: panflute, sizes: '(max-width: 900px) 100vw, 340px' },
+  red: { pic: red, sizes: '(max-width: 900px) 100vw, 340px' },
+  'city-pier': { pic: cityPier, sizes: '(max-width: 900px) 100vw, 700px' },
+};
+
+document.querySelectorAll('img[data-photo]').forEach((img) => {
+  const key = img.dataset.photo;
+  const entry = photoMap[key];
+  if (!entry) return;
+  const { pic, sizes } = entry;
+  if (pic.sources?.webp) img.srcset = pic.sources.webp;
+  img.sizes = sizes;
+  img.src = pic.img.src;
+  if (pic.img.w) img.width = pic.img.w;
+  if (pic.img.h) img.height = pic.img.h;
+});
+
+const toggle = document.querySelector('.nav-toggle');
+const nav = document.getElementById('primary-nav');
+
+if (toggle && nav) {
+  const setOpen = (open) => {
+    nav.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.contains('is-open');
+    setOpen(!isOpen);
+  });
+
+  nav.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target instanceof HTMLAnchorElement) {
+      setOpen(false);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+}

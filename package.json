@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^8.0.4"
+    "sharp": "^0.34.5",
+    "vite": "^8.0.4",
+    "vite-imagetools": "^10.0.0"
   }
 }
