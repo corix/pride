@@ -42,6 +42,7 @@ const photoMap = {
 };
 
 if (SHOW_PHOTOS) {
+  document.documentElement.classList.add('inline-photos-on');
   document.querySelectorAll('img[data-photo]').forEach((img) => {
     const key = img.dataset.photo;
     const entry = photoMap[key];

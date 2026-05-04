@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&display=swap"
       rel="stylesheet"
     />
 
@@ -52,8 +52,8 @@
         <rect x="5" y="0" width="1" height="200" fill="#4a4a4a" />
         <rect x="6" y="0" width="1" height="200" fill="#b0b0b0" />
         <rect x="7" y="0" width="1" height="200" fill="#ffffff" />
-        <rect x="8" y="0" width="1" height="200" fill="#5bcefa" />
-        <rect x="9" y="0" width="1" height="200" fill="#f5a9b8" />
+        <rect x="8" y="0" width="1" height="200" fill="#7cc5e9" />
+        <rect x="9" y="0" width="1" height="200" fill="#fa8cbc" />
         <rect x="10" y="0" width="1" height="200" fill="#e40303" />
         <rect x="11" y="0" width="1" height="200" fill="#ff8c00" />
         <rect x="12" y="0" width="1" height="200" fill="#ffed00" />
@@ -71,47 +71,7 @@
     <header class="site-header">
       <div class="site-header__inner">
         <a class="brand" href="#top" aria-label="PA Pride home">
-          <span class="brand__mark" aria-hidden="true">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 40 40"
-              width="40"
-              height="40"
-              overflow="visible"
-              focusable="false"
-            >
-              <defs>
-                <linearGradient
-                  id="pa-pride-brand-mountains"
-                  x1="0"
-                  y1="0"
-                  x2="40"
-                  y2="0"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop offset="0%" stop-color="var(--red)" />
-                  <stop offset="16.67%" stop-color="var(--red)" />
-                  <stop offset="16.67%" stop-color="var(--orange)" />
-                  <stop offset="33.33%" stop-color="var(--orange)" />
-                  <stop offset="33.33%" stop-color="var(--yellow)" />
-                  <stop offset="50%" stop-color="var(--yellow)" />
-                  <stop offset="50%" stop-color="var(--green)" />
-                  <stop offset="66.67%" stop-color="var(--green)" />
-                  <stop offset="66.67%" stop-color="var(--blue)" />
-                  <stop offset="83.33%" stop-color="var(--blue)" />
-                  <stop offset="83.33%" stop-color="var(--violet)" />
-                  <stop offset="100%" stop-color="var(--violet)" />
-                </linearGradient>
-              </defs>
-              <path
-                fill="url(#pa-pride-brand-mountains)"
-                d="M0 27.27V17L6 20L10 12L14 18L18 8L20 4L22 8L26 18L30 12L34 20L40 17L40 27.27C40 35 31 39 20 39C9 39 0 35 0 27.27Z"
-              />
-            </svg>
-          </span>
-          <span class="brand__text">
-            <span class="brand__name">Port Angeles Pride</span>
-          </span>
+          <span class="brand__name pride-stripes">Port Angeles Pride</span>
         </a>
 
         <button
@@ -152,6 +112,7 @@
     <main id="main">
       <section id="top" class="hero" aria-labelledby="hero-title">
         <div class="hero__bg" data-bg="hero" aria-hidden="true"></div>
+        <div class="hero__scrim" aria-hidden="true"></div>
         <div class="hero__chevron" aria-hidden="true">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -166,11 +127,11 @@
         <div class="hero__inner">
           <p class="eyebrow">Save the date</p>
           <h1 id="hero-title">Pride on the Pier</h1>
+          <p class="hero__date">Sunday, June 14, 2026 • 1:00pm to 5:00pm</p>
           <p class="hero__lede">
             Join us for a celebration of our 2SLGBTQIAA+ community on the Olympic
             Peninsula hosted by PA Pride.
           </p>
-          <p class="hero__date">Sunday, June 14, 2026 • 1:00pm to 5:00pm</p>
           <div class="hero__actions">
             <a
               class="btn btn--primary btn--large"

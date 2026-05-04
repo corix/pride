@@ -6,36 +6,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Coconat';
-  src:
-    url('/fonts/Coconat-Regular.woff2') format('woff2'),
-    url('/fonts/Coconat-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Coconat';
-  src:
-    url('/fonts/Coconat-Demi.woff2') format('woff2'),
-    url('/fonts/Coconat-Demi.woff') format('woff');
-  font-weight: 500 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Coconat';
-  src:
-    url('/fonts/Coconat-Bold.woff2') format('woff2'),
-    url('/fonts/Coconat-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --red: #e40303;
   --orange: #ff8c00;
@@ -46,8 +16,8 @@
 
   --prog-black: #000000;
   --prog-brown: #613915;
-  --trans-blue: #5bcefa;
-  --trans-pink: #f5a9b8;
+  --trans-blue: #7cc5e9;
+  --trans-pink: #fa8cbc;
   --trans-white: #ffffff;
 
   --bg: #fdfbf7;
@@ -65,10 +35,10 @@
   --accent-contrast: #ffffff;
   --focus: #004dff;
 
-  --sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+  --sans: 'DM Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --heading: 'Mort', 'Coconat', ui-sans-serif, system-ui, -apple-system,
-    'Segoe UI', Roboto, sans-serif;
+  --heading: 'Mort', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, sans-serif;
 
   --radius-sm: 6px;
   --radius-md: 12px;
@@ -76,6 +46,50 @@
 
   --container: 1100px;
   --gutter: clamp(20px, 4vw, 40px);
+  /* Shared max line length for headings + body copy (see @media wide bump). */
+  --copy-measure: 65ch;
+
+  /* Matches inline #pa-pride-stripes (19 × 1px columns, repeats horizontally). */
+  --pride-stripes: repeating-linear-gradient(
+    90deg,
+    #000 0 1px,
+    #613915 1px 2px,
+    #ffd800 2px 3px,
+    #d81e9e 3px 4px,
+    #750787 4px 5px,
+    #4a4a4a 5px 6px,
+    #b0b0b0 6px 7px,
+    #ffffff 7px 8px,
+    #7cc5e9 8px 9px,
+    #fa8cbc 9px 10px,
+    #e40303 10px 11px,
+    #ff8c00 11px 12px,
+    #ffed00 12px 13px,
+    #008026 13px 14px,
+    #004dff 14px 15px,
+    #750787 15px 16px,
+    #ff218c 16px 17px,
+    #ffda00 17px 18px,
+    #21b1ff 18px 19px
+  );
+
+  /* Nav wordmark: saturated stops (light bands use vivid mid-tones, not grayed “shadow” hues). */
+  --pride-text-gradient: linear-gradient(
+    90deg,
+    var(--prog-black) 0%,
+    var(--prog-brown) 10%,
+    #e6b800 20%,
+    #d81e9e 30%,
+    var(--violet) 40%,
+    var(--trans-blue) 48%,
+    var(--trans-pink) 56%,
+    var(--red) 64%,
+    var(--orange) 72%,
+    #e8df00 80%,
+    var(--green) 88%,
+    var(--blue) 94%,
+    #1ec8ff 100%
+  );
 
   font-family: var(--sans);
   font-size: 18px;
@@ -88,6 +102,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (min-width: 960px) {
+  :root {
+    --copy-measure: 74ch;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -95,6 +115,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 88px;
+  text-wrap: balance;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -115,6 +136,7 @@ body {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+  overflow-wrap: break-word;
 }
 
 main {
@@ -298,7 +320,6 @@ p:last-child {
   z-index: 50;
   background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: saturate(150%) blur(12px);
-  border-bottom: 1px solid var(--border);
 }
 
 .site-header__inner {
@@ -313,37 +334,31 @@ p:last-child {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
   text-decoration: none;
   color: var(--text);
   margin-right: auto;
 }
 
-.brand__mark {
-  display: inline-flex;
-  line-height: 0;
-  flex-shrink: 0;
-  filter: drop-shadow(0 1px 2px rgba(31, 27, 46, 0.06))
-    drop-shadow(0 2px 6px rgba(31, 27, 46, 0.06));
+.pride-stripes {
+  display: inline-block;
 }
 
-.brand__mark svg {
-  display: block;
-  width: 38px;
-  height: auto;
-  aspect-ratio: 1;
-}
-
-.brand__text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
+.brand .pride-stripes {
+  background-image: var(--pride-text-gradient);
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  /* Edge separation without gray stroke muddying the gradient fill. */
+  filter: drop-shadow(0 0.5px 0.6px rgb(31 27 46 / 0.22));
 }
 
 .brand__name {
   font-family: var(--heading);
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  line-height: 1.15;
 }
 
 .brand__sub {
@@ -469,7 +484,7 @@ p:last-child {
   background-repeat: no-repeat;
 }
 
-/* Hero photo + white wash (see main.js); scrims on ::after still tune contrast */
+/* Hero photo + white wash (see main.js); contrast scrims live on .hero__scrim */
 .hero__bg::before {
   content: '';
   position: absolute;
@@ -478,24 +493,25 @@ p:last-child {
   background-image:
     linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.28) 0%,
-      rgba(255, 255, 255, 0.18) 45%,
-      rgba(255, 255, 255, 0.1) 100%
+      rgba(255, 255, 255, 0.34) 0%,
+      rgba(255, 255, 255, 0.22) 45%,
+      rgba(255, 255, 255, 0.13) 100%
     ),
     var(--hero-photo, none);
   background-size: cover, cover;
   background-position: center 35%, center 35%;
   background-repeat: no-repeat, no-repeat;
-  opacity: 0.62;
-  filter: brightness(1.12) contrast(0.96) saturate(0.92);
+  opacity: 0.84;
+  filter: brightness(1.4) contrast(1) saturate(0.96);
   pointer-events: none;
 }
 
-.hero__bg::after {
-  content: '';
+/* Below hero__chevron so stripes can use full opacity (no scrim on top). */
+.hero__scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
+  pointer-events: none;
   background:
     linear-gradient(
       180deg,
@@ -513,7 +529,7 @@ p:last-child {
 
 .hero__inner {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 var(--gutter);
@@ -523,13 +539,67 @@ p:last-child {
 .hero__chevron {
   position: absolute;
   inset: 0;
-  z-index: 1;
-  opacity: 0.14;
+  z-index: 2;
   pointer-events: none;
-  mix-blend-mode: screen;
+  /* ~4px at full opacity; rest of mask alphas −0.02 vs prior; fade to 0 by ~97%. */
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0,
+    #000 4px,
+    rgba(0, 0, 0, 0.89) calc(4px + 0.8%),
+    rgba(0, 0, 0, 0.73) calc(4px + 2.5%),
+    rgba(0, 0, 0, 0.53) calc(4px + 5%),
+    rgba(0, 0, 0, 0.33) calc(4px + 8.5%),
+    rgba(0, 0, 0, 0.19) calc(4px + 12%),
+    rgba(0, 0, 0, 0.11) calc(4px + 15%),
+    rgba(0, 0, 0, 0.065) calc(4px + 19%),
+    rgba(0, 0, 0, 0.052) 38%,
+    rgba(0, 0, 0, 0.05) 48%,
+    rgba(0, 0, 0, 0.047) 55%,
+    rgba(0, 0, 0, 0.042) 62%,
+    rgba(0, 0, 0, 0.036) 69%,
+    rgba(0, 0, 0, 0.03) 75%,
+    rgba(0, 0, 0, 0.024) 81%,
+    rgba(0, 0, 0, 0.019) 86%,
+    rgba(0, 0, 0, 0.015) 90%,
+    rgba(0, 0, 0, 0.0125) 93%,
+    rgba(0, 0, 0, 0.011) 95%,
+    rgba(0, 0, 0, 0) 97%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    #000 0,
+    #000 4px,
+    rgba(0, 0, 0, 0.89) calc(4px + 0.8%),
+    rgba(0, 0, 0, 0.73) calc(4px + 2.5%),
+    rgba(0, 0, 0, 0.53) calc(4px + 5%),
+    rgba(0, 0, 0, 0.33) calc(4px + 8.5%),
+    rgba(0, 0, 0, 0.19) calc(4px + 12%),
+    rgba(0, 0, 0, 0.11) calc(4px + 15%),
+    rgba(0, 0, 0, 0.065) calc(4px + 19%),
+    rgba(0, 0, 0, 0.052) 38%,
+    rgba(0, 0, 0, 0.05) 48%,
+    rgba(0, 0, 0, 0.047) 55%,
+    rgba(0, 0, 0, 0.042) 62%,
+    rgba(0, 0, 0, 0.036) 69%,
+    rgba(0, 0, 0, 0.03) 75%,
+    rgba(0, 0, 0, 0.024) 81%,
+    rgba(0, 0, 0, 0.019) 86%,
+    rgba(0, 0, 0, 0.015) 90%,
+    rgba(0, 0, 0, 0.0125) 93%,
+    rgba(0, 0, 0, 0.011) 95%,
+    rgba(0, 0, 0, 0) 97%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 .hero__chevron svg {
+  display: block;
   width: 100%;
   height: 100%;
 }
@@ -549,8 +619,8 @@ p:last-child {
   font-family: var(--sans);
   font-size: clamp(1.1rem, 1.7vw, 1.3rem);
   color: rgba(255, 255, 255, 0.88);
-  max-width: 58ch;
-  margin-bottom: 0.8em;
+  max-width: var(--copy-measure);
+  margin-bottom: 1.8em;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
@@ -558,11 +628,14 @@ p:last-child {
   font-family: var(--heading);
   font-weight: 600;
   color: #fff;
-  margin-bottom: 1.8em;
+  max-width: var(--copy-measure);
+  margin-bottom: 0.8em;
 }
 
 .hero h1 {
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+  /* Global h1 uses 0.5em bottom margin, which scales huge here; keep date line close. */
+  margin-bottom: clamp(0.35rem, 1vw, 0.75rem);
 }
 
 .hero__actions {
@@ -586,16 +659,20 @@ p:last-child {
   padding: 0 var(--gutter);
 }
 
+section.section h2 {
+  max-width: var(--copy-measure);
+}
+
 .section__lede {
   font-family: var(--sans);
   font-size: 1.1rem;
   color: var(--text-muted);
-  max-width: 60ch;
+  max-width: var(--copy-measure);
   margin-bottom: 2em;
 }
 
 .prose {
-  max-width: 65ch;
+  max-width: var(--copy-measure);
   font-family: var(--sans);
 }
 
@@ -825,7 +902,8 @@ figcaption {
 }
 
 @media (min-width: 900px) {
-  .about__grid {
+  /* Two columns only when the figure is shown; avoids an empty 420px track squeezing copy. */
+  html.inline-photos-on .about__grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
   }
 }
@@ -973,9 +1051,9 @@ figcaption {
   }
 }
 
-/* Inline festival/about photos hidden while SHOW_PHOTOS is off in main.js */
-.about__figure,
-.photo-strip {
+/* Inline about/festival photos: hidden until SHOW_PHOTOS (see main.js + .inline-photos-on). */
+html:not(.inline-photos-on) .about__figure,
+html:not(.inline-photos-on) .photo-strip {
   display: none;
 }
 
