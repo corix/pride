@@ -1,3 +1,33 @@
+@font-face {
+  font-family: 'Coconat';
+  src:
+    url('/fonts/Coconat-Regular.woff2') format('woff2'),
+    url('/fonts/Coconat-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Coconat';
+  src:
+    url('/fonts/Coconat-Demi.woff2') format('woff2'),
+    url('/fonts/Coconat-Demi.woff') format('woff');
+  font-weight: 500 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Coconat';
+  src:
+    url('/fonts/Coconat-Bold.woff2') format('woff2'),
+    url('/fonts/Coconat-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --red: #e40303;
   --orange: #ff8c00;
@@ -27,9 +57,9 @@
   --accent-contrast: #ffffff;
   --focus: #004dff;
 
-  --sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
-  --heading: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+  --sans: 'Coconat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --heading: 'Coconat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
     Roboto, sans-serif;
 
   --radius-sm: 6px;
@@ -109,7 +139,7 @@ h1,
 h2,
 h3 {
   font-family: var(--heading);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text);
   line-height: 1.15;
   margin: 0 0 0.5em;
@@ -139,6 +169,7 @@ p:last-child {
 
 .eyebrow {
   display: inline-block;
+  font-family: var(--heading);
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.78rem;
@@ -295,7 +326,7 @@ p:last-child {
 
 .brand__name {
   font-family: var(--heading);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.1rem;
 }
 
@@ -668,12 +699,13 @@ p:last-child {
 }
 
 .site-footer__heading {
+  font-family: var(--heading);
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--text-muted);
   margin: 0 0 12px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .site-footer__list {
