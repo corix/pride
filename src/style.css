@@ -115,7 +115,6 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 88px;
-  text-wrap: balance;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -173,6 +172,7 @@ h3 {
   line-height: 1.15;
   margin: 0 0 0.5em;
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 h1 {
@@ -988,5 +988,119 @@ figcaption {
   .gallery__item--wide {
     grid-column: span 2;
   }
+}
+
+/* Screen reader–only headings / labels */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Same row pattern as homepage .hero__actions; fades in when embed fails (main.js). */
+.hero__actions.volunteer-form__external {
+  display: flex;
+  visibility: hidden;
+  pointer-events: none;
+  /* Collapse layout instantly; opacity is the only animated property (no “shade” easing). */
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.85s ease;
+}
+
+.hero__actions.volunteer-form__external.volunteer-form__external--show {
+  height: auto;
+  margin: 0 0 1.25rem;
+  overflow: visible;
+  visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__actions.volunteer-form__external {
+    transition: none;
+  }
+}
+
+.volunteer-hero__form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+
+.volunteer-hero__form .tally-embed {
+  align-self: stretch;
+  /* Optical match to .prose: Tally’s embed content has a few px of inner inset. */
+  margin-left: -5px;
+  width: calc(100% + 5px);
+  transition: opacity 0.45s ease;
+}
+
+.volunteer-hero__form .tally-embed.tally-embed--reveal-pending {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .volunteer-hero__form .tally-embed {
+    transition: none;
+  }
+
+  .volunteer-hero__form .tally-embed.tally-embed--reveal-pending {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.section--volunteer-hero .volunteer-expect {
+  margin-top: 1.5rem;
+}
+
+.volunteer-expect__heading {
+  margin: 0 0 0.65em;
+}
+
+.volunteer-expect ul {
+  margin: 0;
+  padding-left: 1.25em;
+  color: var(--text-muted);
+  max-width: var(--copy-measure);
+}
+
+.volunteer-expect li {
+  margin-bottom: 0.5em;
+}
+
+.volunteer-expect li:last-child {
+  margin-bottom: 0;
+}
+
+/* Tally: flat layout; height comes from embed.js + dynamicHeight (no framed box / inner scroll). */
+.tally-embed {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.tally-embed.volunteer-form__embed--hidden {
+  display: none;
+}
+
+.tally-embed__iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: 0;
 }
 

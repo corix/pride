@@ -67,3 +67,78 @@ if (toggle && nav) {
     }
   });
 }
+
+/** Volunteer page: show “open in new tab” only if Tally embed never gains height (blocked / failed). */
+const volunteerExternal = document.querySelector('.volunteer-form__external');
+const tallyIframe = document.querySelector('.tally-embed__iframe');
+const tallyEmbedWrap = tallyIframe?.closest('.tally-embed');
+
+if (volunteerExternal instanceof HTMLElement && tallyIframe instanceof HTMLIFrameElement) {
+  const MIN_HEIGHT = 320;
+  /** If the iframe never grows by this point, treat embed as failed (UX vs slow networks). */
+  const FAIL_AFTER_MS = 1200;
+  const POLL_MS = 400;
+
+  volunteerExternal.setAttribute('aria-hidden', 'true');
+  if (tallyEmbedWrap instanceof HTMLElement) {
+    tallyEmbedWrap.setAttribute('aria-hidden', 'true');
+  }
+
+  const hideTallyEmbed = () => {
+    if (tallyEmbedWrap instanceof HTMLElement) {
+      tallyEmbedWrap.classList.add('volunteer-form__embed--hidden');
+      tallyEmbedWrap.setAttribute('aria-hidden', 'true');
+    }
+  };
+
+  const showTallyEmbed = () => {
+    if (tallyEmbedWrap instanceof HTMLElement) {
+      tallyEmbedWrap.classList.remove('volunteer-form__embed--hidden');
+      tallyEmbedWrap.removeAttribute('aria-hidden');
+    }
+  };
+
+  const showFallback = () => {
+    volunteerExternal.classList.add('volunteer-form__external--show');
+    volunteerExternal.removeAttribute('aria-hidden');
+    hideTallyEmbed();
+  };
+
+  const hideFallback = () => {
+    volunteerExternal.classList.remove('volunteer-form__external--show');
+    volunteerExternal.setAttribute('aria-hidden', 'true');
+    showTallyEmbed();
+  };
+
+  const healthy = () => tallyIframe.getBoundingClientRect().height >= MIN_HEIGHT;
+
+  let failTimer = window.setTimeout(() => {
+    if (!healthy()) showFallback();
+  }, FAIL_AFTER_MS);
+
+  /** Stop timers / observers once the embed clearly loaded. */
+  const stopMonitoring = () => {
+    window.clearTimeout(failTimer);
+    if (pollId) window.clearInterval(pollId);
+    ro?.disconnect();
+  };
+
+  const onMaybeHealthy = () => {
+    if (!healthy()) return;
+    if (tallyEmbedWrap instanceof HTMLElement) {
+      tallyEmbedWrap.classList.remove('tally-embed--reveal-pending');
+      tallyEmbedWrap.removeAttribute('aria-hidden');
+    }
+    hideFallback();
+    stopMonitoring();
+  };
+
+  let pollId = 0;
+  let ro;
+  if (typeof ResizeObserver !== 'undefined') {
+    ro = new ResizeObserver(onMaybeHealthy);
+    ro.observe(tallyIframe);
+  } else {
+    pollId = window.setInterval(onMaybeHealthy, POLL_MS);
+  }
+}
