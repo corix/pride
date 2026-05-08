@@ -34,6 +34,14 @@
     <meta name="twitter:card" content="summary" />
 
     <title>PA Pride — Pride on the Pier, Port Angeles, WA</title>
+
+    <style>
+      /* Prevent FOUC: keep stripes invisible until app CSS loads (then CSS fades them in). */
+      .rainbow-bar,
+      .hero__chevron {
+        opacity: 0;
+      }
+    </style>
   </head>
   <body>
     <!-- Inline sprite: same-document <use> avoids browsers caching /icons.svg for stripe updates. -->
@@ -49,8 +57,8 @@
         <rect x="2" y="0" width="1" height="200" fill="#ffd800" />
         <rect x="3" y="0" width="1" height="200" fill="#d81e9e" />
         <rect x="4" y="0" width="1" height="200" fill="#750787" />
-        <rect x="5" y="0" width="1" height="200" fill="#4a4a4a" />
-        <rect x="6" y="0" width="1" height="200" fill="#b0b0b0" />
+        <rect x="5" y="0" width="1" height="200" fill="#494a61" />
+        <rect x="6" y="0" width="1" height="200" fill="#aeb0cc" />
         <rect x="7" y="0" width="1" height="200" fill="#ffffff" />
         <rect x="8" y="0" width="1" height="200" fill="#7cc5e9" />
         <rect x="9" y="0" width="1" height="200" fill="#fa8cbc" />
@@ -88,8 +96,8 @@
 
         <nav id="primary-nav" class="primary-nav" aria-label="Primary">
           <ul>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#festival">Pride Festival</a></li>
+            <!-- <li><a href="#about">About Us</a></li> -->
+            <!-- <li><a href="#festival">Pride Festival</a></li> -->
 <!--            <li><a href="#get-involved">Get Involved</a></li> -->
 <!--        <li><a href="#gallery">Gallery</a></li> -->
 <!--            <li><a class="primary-nav__cta" href="#donate">Donate</a></li> -->
@@ -164,6 +172,16 @@
                 Angeles waterfront. Donations to PA Pride are fully tax-deductible.
               </p>
             </div>
+            <div class="link-row">
+              <a
+                class="btn btn--ghost"
+                href="https://www.facebook.com/profile.php?id=61574747745779"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Follow our page <span class="btn__arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -188,14 +206,6 @@
               rel="noopener noreferrer"
             >
               Full event details <span class="btn__arrow" aria-hidden="true">→</span>
-            </a>
-            <a
-              class="btn btn--ghost"
-              href="https://www.facebook.com/profile.php?id=61574747745779"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Follow our page <span class="btn__arrow" aria-hidden="true">→</span>
             </a>
           </div>
         </div>

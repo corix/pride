@@ -10,6 +10,20 @@ if (heroBgEl) {
   const prefersSmallData = matchMedia('(prefers-reduced-data: reduce)').matches;
   const heroUrl = prefersSmallData ? heroPhotoSm : heroPhotoLg;
   heroBgEl.style.setProperty('--hero-photo', `url("${heroUrl}")`);
+
+  // Fade the photo in once the image is actually loaded (avoids a “pop” on refresh).
+  if (heroBgEl instanceof HTMLElement) {
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = heroUrl;
+    const reveal = () => heroBgEl.classList.add('hero__bg--photo-ready');
+    if (img.complete) {
+      requestAnimationFrame(reveal);
+    } else {
+      img.addEventListener('load', reveal, { once: true });
+      img.addEventListener('error', () => {}, { once: true });
+    }
+  }
 }
 
 /** Subtle scroll parallax on hero photo (::before); disabled when reduced motion. */

@@ -57,8 +57,8 @@
     #ffd800 2px 3px,
     #d81e9e 3px 4px,
     #750787 4px 5px,
-    #4a4a4a 5px 6px,
-    #b0b0b0 6px 7px,
+    #494a61 5px 6px,
+    #aeb0cc 6px 7px,
     #ffffff 7px 8px,
     #7cc5e9 8px 9px,
     #fa8cbc 9px 10px,
@@ -229,6 +229,8 @@ p:last-child {
 }
 
 .rainbow-bar {
+  opacity: 1;
+  transition: opacity 520ms ease;
   height: 7px;
   line-height: 0;
   /* Underpaint if the SVG leaves a subpixel gap; solid avoids moiré vs stripes. */
@@ -240,6 +242,10 @@ p:last-child {
   width: 100%;
   height: 100%;
   vertical-align: top;
+}
+
+.site-footer .rainbow-bar {
+  margin-top: -1px;
 }
 
 .btn {
@@ -494,23 +500,39 @@ p:last-child {
   /* Bleed past hero so translateY parallax does not show seams */
   inset: -7%;
   z-index: 0;
-  background-image:
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.34) 0%,
-      rgba(255, 255, 255, 0.22) 45%,
-      rgba(255, 255, 255, 0.13) 100%
-    ),
-    var(--hero-photo, none);
-  background-size: cover, cover;
-  background-position: center 35%, center 35%;
-  background-repeat: no-repeat, no-repeat;
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.34) 0%,
+    rgba(255, 255, 255, 0.22) 45%,
+    rgba(255, 255, 255, 0.13) 100%
+  );
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
   opacity: 0.84;
+  pointer-events: none;
+}
+
+.hero__bg::after {
+  content: '';
+  position: absolute;
+  inset: -7%;
+  z-index: 0;
+  background-image: var(--hero-photo, none);
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+  opacity: 0;
   filter: brightness(1.4) contrast(1) saturate(0.96);
   pointer-events: none;
   transform: translate3d(0, var(--hero-parallax-y, 0px), 0) scale(1.05);
   transform-origin: center 35%;
-  will-change: transform;
+  will-change: transform, opacity;
+  transition: opacity 1400ms ease;
+}
+
+.hero__bg.hero__bg--photo-ready::after {
+  opacity: 0.84;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -518,6 +540,14 @@ p:last-child {
     inset: 0;
     transform: none;
     will-change: auto;
+  }
+
+  .hero__bg::after {
+    inset: 0;
+    transform: none;
+    will-change: auto;
+    transition: none;
+    opacity: 0.84;
   }
 }
 
@@ -552,6 +582,8 @@ p:last-child {
 }
 
 .hero__chevron {
+  opacity: 1;
+  transition: opacity 520ms ease;
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -829,8 +861,9 @@ section.section h2 {
 }
 
 .site-footer {
-  background: var(--bg-alt);
-  border-top: 1px solid var(--border);
+  background: #3d004a;
+  color: #d9c3eb;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
   margin-top: 0;
 }
 
@@ -848,8 +881,12 @@ section.section h2 {
   margin-bottom: 6px;
 }
 
+.site-footer__col .brand__name {
+  color: #b89bd8;
+}
+
 .site-footer__meta {
-  color: var(--text-muted);
+  color: #cbb0e3;
   font-size: 0.92rem;
   margin: 0;
 }
@@ -859,7 +896,7 @@ section.section h2 {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--text-muted);
+  color: #b89bd8;
   margin: 0 0 12px;
   font-weight: 600;
 }
@@ -877,13 +914,13 @@ section.section h2 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--text);
+  color: #e7d9f2;
   text-decoration: none;
   font-size: 0.95rem;
 }
 
 .site-footer__list a:hover {
-  color: var(--accent);
+  color: #ffffff;
   text-decoration: underline;
 }
 
@@ -891,9 +928,9 @@ section.section h2 {
   max-width: var(--container);
   margin: 0 auto;
   padding: 16px var(--gutter) 32px;
-  color: var(--text-muted);
+  color: #b89bd8;
   font-size: 0.85rem;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .site-footer__fineprint p {
@@ -905,7 +942,7 @@ section.section h2 {
 }
 
 .site-footer__credits {
-  color: var(--text-muted);
+  color: #b89bd8;
 }
 
 figure {
