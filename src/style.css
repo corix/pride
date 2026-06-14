@@ -48,6 +48,8 @@
   --gutter: clamp(20px, 4vw, 40px);
   /* Shared max line length for headings + body copy (see @media wide bump). */
   --copy-measure: 65ch;
+  --text-body: 1.125rem;
+  --text-lede: 1.25rem;
 
   /* Matches inline #pa-pride-stripes (19 × 1px columns, repeats horizontally). */
   --pride-stripes: repeating-linear-gradient(
@@ -127,6 +129,28 @@ html {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+/* Soft fade-in on load and scroll (see initScrollReveal in main.js). */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 1.1rem, 0);
+  transition:
+    opacity 0.85s ease,
+    transform 0.85s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.reveal--in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -614,7 +638,7 @@ p:last-child {
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 var(--gutter);
-  text-align: left;
+  text-align: center;
 }
 
 .hero__chevron {
@@ -685,9 +709,10 @@ p:last-child {
 
 .hero__lede {
   font-family: var(--sans);
-  font-size: clamp(1.1rem, 1.7vw, 1.3rem);
+  font-size: clamp(var(--text-lede), 1.9vw, 1.45rem);
   color: rgba(255, 255, 255, 0.88);
   max-width: var(--copy-measure);
+  margin-inline: auto;
   margin-bottom: 1.8em;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
@@ -697,9 +722,11 @@ p:last-child {
   font-weight: 600;
   color: #fff;
   max-width: var(--copy-measure);
+  margin-inline: auto;
   margin-bottom: 0.8em;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: baseline;
   column-gap: 0;
   row-gap: 0.2em;
@@ -710,7 +737,7 @@ p:last-child {
   .hero__date {
     flex-direction: column;
     flex-wrap: nowrap;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .hero__date-sep {
@@ -737,6 +764,7 @@ p:last-child {
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
 }
 
@@ -835,7 +863,7 @@ section.section h2 {
 
 .section__lede {
   font-family: var(--sans);
-  font-size: 1.1rem;
+  font-size: var(--text-lede);
   color: var(--text-muted);
   max-width: var(--copy-measure);
   margin-bottom: 2em;
@@ -844,6 +872,7 @@ section.section h2 {
 .prose {
   max-width: var(--copy-measure);
   font-family: var(--sans);
+  font-size: var(--text-body);
 }
 
 .prose p {
@@ -857,7 +886,7 @@ section.section h2 {
 
 .prose__subhead {
   font-family: var(--heading);
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: var(--text);
   margin: 1.5em 0 0.6em;
@@ -865,6 +894,7 @@ section.section h2 {
 
 .name-list {
   margin: 0 0 1em;
+  font-size: var(--text-body);
   color: var(--text-muted);
 }
 

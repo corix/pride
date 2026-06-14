@@ -202,3 +202,75 @@ if (volunteerExternal instanceof HTMLElement && tallyIframe instanceof HTMLIFram
     pollId = window.setInterval(onMaybeHealthy, POLL_MS);
   }
 }
+
+/** Soft fade-in on load and scroll; skipped when reduced motion is preferred. */
+function initScrollReveal() {
+  if (reduceMotionMq.matches) return;
+
+  const SELECTORS = [
+    '.site-header__inner',
+    '.hero__inner > *',
+    '.about__text',
+    '.about__figure',
+    '.section .section__inner > .eyebrow',
+    '.section .section__inner > h2',
+    '.section .section__inner > .section__lede',
+    '.section .section__inner > .prose',
+    '.section .section__inner > .link-row',
+    '.festival-posters > li',
+    '.gallery__item',
+    '.photo-banner__inner > *',
+    '.section--volunteer-hero .section__inner > *',
+    '.site-footer__inner > *',
+    '.site-footer__fineprint',
+  ].join(', ');
+
+  const seen = new Set();
+  const elements = [...document.querySelectorAll(SELECTORS)].filter((el) => {
+    if (seen.has(el)) return false;
+    seen.add(el);
+    return true;
+  });
+
+  if (!elements.length) return;
+
+  document.querySelectorAll('.hero__inner > *').forEach((el, i) => {
+    el.style.setProperty('--reveal-delay', `${i * 100}ms`);
+  });
+
+  document.querySelectorAll('.festival-posters > li').forEach((el, i) => {
+    el.style.setProperty('--reveal-delay', `${i * 80}ms`);
+  });
+
+  document.querySelectorAll('.gallery__item').forEach((el, i) => {
+    el.style.setProperty('--reveal-delay', `${(i % 6) * 70}ms`);
+  });
+
+  elements.forEach((el) => el.classList.add('reveal'));
+
+  const reveal = (el) => {
+    el.classList.add('reveal--in');
+    observer.unobserve(el);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) reveal(entry.target);
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }
+  );
+
+  elements.forEach((el) => observer.observe(el));
+
+  reduceMotionMq.addEventListener('change', (event) => {
+    if (!event.matches) return;
+    elements.forEach((el) => {
+      el.classList.add('reveal--in');
+      observer.unobserve(el);
+    });
+  });
+}
+
+initScrollReveal();
