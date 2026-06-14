@@ -1,8 +1,8 @@
-# PA Pride
+# Pride of PA
 
-Build the 1.0 basic version of a website for PA Pride, a nonprofit organization that hosts an annual "Pride on the Pier" 1-day festival in Port Angeles, Washington.
+Build the 1.0 basic version of a website for Pride of PA, a nonprofit organization that hosts an annual "Pride on the Pier" 1-day festival in Port Angeles, Washington.
 
-The organization, PA Pride, is a 501(c)(3) that can accept tax-deductible donations.
+The organization, Pride of PA, is a 501(c)(3) that can accept tax-deductible donations.
 
 ## Requirements
 
@@ -43,7 +43,7 @@ The repo is a Vite-built single-page site: **hero** (2026 date, Facebook RSVP), 
 
 ## Appendix
 
-- PA Pride [Facebook Group](https://www.facebook.com/profile.php?id=61574747745779)
+- Pride of PA [Facebook Group](https://www.facebook.com/profile.php?id=61574747745779)
 - Facebook event for [Pride on the Pier 2026](https://www.facebook.com/events/924895537022838/?rdid=DE8d0ZcGhbIuin4K&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F14dos9483NA%2F#)
 
 Reference

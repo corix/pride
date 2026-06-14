@@ -52,43 +52,43 @@
   /* Matches inline #pa-pride-stripes (19 × 1px columns, repeats horizontally). */
   --pride-stripes: repeating-linear-gradient(
     90deg,
-    #000 0 1px,
-    #613915 1px 2px,
-    #ffd800 2px 3px,
-    #d81e9e 3px 4px,
-    #750787 4px 5px,
-    #494a61 5px 6px,
-    #aeb0cc 6px 7px,
-    #ffffff 7px 8px,
-    #7cc5e9 8px 9px,
-    #fa8cbc 9px 10px,
-    #e40303 10px 11px,
-    #ff8c00 11px 12px,
-    #ffed00 12px 13px,
-    #008026 13px 14px,
-    #004dff 14px 15px,
-    #750787 15px 16px,
-    #ff218c 16px 17px,
-    #ffda00 17px 18px,
-    #21b1ff 18px 19px
+    #7a7590 0 1px,
+    #b89870 1px 2px,
+    #d4b830 2px 3px,
+    #c85898 3px 4px,
+    #a870c0 4px 5px,
+    #9090a8 5px 6px,
+    #b0b0c8 6px 7px,
+    #c8c8d0 7px 8px,
+    #88c8e8 8px 9px,
+    #e898b8 9px 10px,
+    #e08070 10px 11px,
+    #e8a050 11px 12px,
+    #e8d848 12px 13px,
+    #58b078 13px 14px,
+    #68a8e0 14px 15px,
+    #9870b8 15px 16px,
+    #e870a8 16px 17px,
+    #e8c840 17px 18px,
+    #70c0e8 18px 19px
   );
 
-  /* Nav wordmark: saturated stops (light bands use vivid mid-tones, not grayed “shadow” hues). */
+  /* Nav wordmark: even-brightness stops (no strong red or dark blue). */
   --pride-text-gradient: linear-gradient(
     90deg in oklch,
-    var(--prog-black) 0%,
-    var(--prog-brown) 10%,
-    #e6b800 20%,
-    #d81e9e 30%,
-    var(--violet) 40%,
-    var(--trans-blue) 48%,
-    var(--trans-pink) 56%,
-    var(--red) 64%,
-    var(--orange) 72%,
-    #e8df00 80%,
-    var(--green) 88%,
-    var(--blue) 94%,
-    #1ec8ff 100%
+    oklch(0.68 0.05 285) 0%,
+    oklch(0.7 0.09 55) 10%,
+    oklch(0.76 0.14 90) 20%,
+    oklch(0.72 0.15 330) 30%,
+    oklch(0.7 0.14 305) 40%,
+    oklch(0.76 0.09 220) 48%,
+    oklch(0.76 0.11 350) 56%,
+    oklch(0.72 0.13 25) 64%,
+    oklch(0.74 0.13 55) 72%,
+    oklch(0.78 0.13 95) 80%,
+    oklch(0.72 0.11 155) 88%,
+    oklch(0.72 0.11 245) 94%,
+    oklch(0.74 0.1 210) 100%
   );
 
   font-family: var(--sans);
@@ -479,6 +479,20 @@ p:last-child {
   position: absolute;
   inset: 0;
   z-index: 0;
+}
+
+.hero__bg.photo-bg,
+.hero__bg.photo-bg::before,
+.hero__bg.photo-bg::after {
+  background-position: center bottom;
+}
+
+.hero__bg.photo-bg::after {
+  transform-origin: center bottom;
+}
+
+/* Shared photo background: gradient fallback, white wash (::before), photo (::after). */
+.photo-bg {
   background-color: #1a1525;
   background-image: linear-gradient(
     155deg,
@@ -493,11 +507,9 @@ p:last-child {
   background-repeat: no-repeat;
 }
 
-/* Hero photo + white wash (see main.js); contrast scrims live on .hero__scrim */
-.hero__bg::before {
+.photo-bg::before {
   content: '';
   position: absolute;
-  /* Bleed past hero so translateY parallax does not show seams */
   inset: -7%;
   z-index: 0;
   background-image: linear-gradient(
@@ -513,36 +525,36 @@ p:last-child {
   pointer-events: none;
 }
 
-.hero__bg::after {
+.photo-bg::after {
   content: '';
   position: absolute;
   inset: -7%;
   z-index: 0;
-  background-image: var(--hero-photo, none);
+  background-image: var(--photo-bg, none);
   background-size: cover;
   background-position: center 35%;
   background-repeat: no-repeat;
   opacity: 0;
   filter: brightness(1.4) contrast(1) saturate(0.96);
   pointer-events: none;
-  transform: translate3d(0, var(--hero-parallax-y, 0px), 0) scale(1.05);
+  transform: translate3d(0, var(--photo-parallax-y, 0px), 0) scale(1.05);
   transform-origin: center 35%;
   will-change: transform, opacity;
   transition: opacity 1400ms ease;
 }
 
-.hero__bg.hero__bg--photo-ready::after {
+.photo-bg.photo-bg--ready::after {
   opacity: 0.84;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__bg::before {
+  .photo-bg::before {
     inset: 0;
     transform: none;
     will-change: auto;
   }
 
-  .hero__bg::after {
+  .photo-bg::after {
     inset: 0;
     transform: none;
     will-change: auto;
@@ -552,23 +564,47 @@ p:last-child {
 }
 
 /* Below hero__chevron so stripes can use full opacity (no scrim on top). */
-.hero__scrim {
+.hero__scrim,
+.photo-banner__scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
+}
+
+.hero__scrim {
   background:
     linear-gradient(
       180deg,
-      rgba(26, 21, 37, 0.55) 0%,
-      rgba(26, 21, 37, 0.35) 40%,
+      rgba(26, 21, 37, 0.42) 0%,
+      rgba(26, 21, 37, 0.28) 40%,
       rgba(26, 21, 37, 0.85) 100%
     ),
     linear-gradient(
       90deg,
-      rgba(26, 21, 37, 0.7) 0%,
-      rgba(26, 21, 37, 0.2) 55%,
-      rgba(117, 7, 135, 0.35) 100%
+      rgba(26, 21, 37, 0.55) 0%,
+      rgba(26, 21, 37, 0.16) 55%,
+      rgba(117, 7, 135, 0.28) 100%
+    );
+}
+
+/* Lighter blue wash at top; smooth blend through middle; dark base for footer text. */
+.photo-banner__scrim {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(110, 165, 215, 0.08) 0%,
+      rgba(85, 135, 195, 0.14) 18%,
+      rgba(60, 95, 150, 0.24) 38%,
+      rgba(40, 55, 90, 0.42) 55%,
+      rgba(26, 21, 37, 0.68) 72%,
+      rgba(26, 21, 37, 0.9) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(26, 21, 37, 0.42) 0%,
+      rgba(26, 21, 37, 0.1) 48%,
+      rgba(70, 115, 175, 0.16) 100%
     );
 }
 
@@ -594,14 +630,14 @@ p:last-child {
     180deg,
     #000 0,
     #000 4px,
-    rgba(0, 0, 0, 0.89) calc(4px + 0.8%),
-    rgba(0, 0, 0, 0.73) calc(4px + 2.5%),
-    rgba(0, 0, 0, 0.53) calc(4px + 5%),
-    rgba(0, 0, 0, 0.33) calc(4px + 8.5%),
-    rgba(0, 0, 0, 0.19) calc(4px + 12%),
-    rgba(0, 0, 0, 0.11) calc(4px + 15%),
-    rgba(0, 0, 0, 0.065) calc(4px + 19%),
-    rgba(0, 0, 0, 0.052) 38%,
+    rgba(0, 0, 0, 0.94) calc(4px + 0.8%),
+    rgba(0, 0, 0, 0.79) calc(4px + 2.5%),
+    rgba(0, 0, 0, 0.59) calc(4px + 5%),
+    rgba(0, 0, 0, 0.39) calc(4px + 8.5%),
+    rgba(0, 0, 0, 0.24) calc(4px + 12%),
+    rgba(0, 0, 0, 0.15) calc(4px + 15%),
+    rgba(0, 0, 0, 0.09) calc(4px + 19%),
+    rgba(0, 0, 0, 0.07) 38%,
     rgba(0, 0, 0, 0.03) 44%,
     rgba(0, 0, 0, 0.014) 47%,
     rgba(0, 0, 0, 0) 50%,
@@ -611,14 +647,14 @@ p:last-child {
     180deg,
     #000 0,
     #000 4px,
-    rgba(0, 0, 0, 0.89) calc(4px + 0.8%),
-    rgba(0, 0, 0, 0.73) calc(4px + 2.5%),
-    rgba(0, 0, 0, 0.53) calc(4px + 5%),
-    rgba(0, 0, 0, 0.33) calc(4px + 8.5%),
-    rgba(0, 0, 0, 0.19) calc(4px + 12%),
-    rgba(0, 0, 0, 0.11) calc(4px + 15%),
-    rgba(0, 0, 0, 0.065) calc(4px + 19%),
-    rgba(0, 0, 0, 0.052) 38%,
+    rgba(0, 0, 0, 0.94) calc(4px + 0.8%),
+    rgba(0, 0, 0, 0.79) calc(4px + 2.5%),
+    rgba(0, 0, 0, 0.59) calc(4px + 5%),
+    rgba(0, 0, 0, 0.39) calc(4px + 8.5%),
+    rgba(0, 0, 0, 0.24) calc(4px + 12%),
+    rgba(0, 0, 0, 0.15) calc(4px + 15%),
+    rgba(0, 0, 0, 0.09) calc(4px + 19%),
+    rgba(0, 0, 0, 0.07) 38%,
     rgba(0, 0, 0, 0.03) 44%,
     rgba(0, 0, 0, 0.014) 47%,
     rgba(0, 0, 0, 0) 50%,
@@ -704,6 +740,80 @@ p:last-child {
   gap: 12px;
 }
 
+.photo-banner {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: clamp(420px, 52vw, 580px);
+  padding: clamp(56px, 9vw, 96px) 0 clamp(32px, 4vw, 48px);
+  background: #1a1525;
+  color: #fff;
+  display: flex;
+  align-items: flex-end;
+}
+
+.photo-banner__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Shift focal point down so the shorter band shows more of the pier/water below. */
+.photo-banner__bg.photo-bg,
+.photo-banner__bg.photo-bg::before,
+.photo-banner__bg.photo-bg::after {
+  background-position: center 72%;
+}
+
+.photo-banner__bg.photo-bg::after {
+  transform-origin: center 72%;
+}
+
+.photo-banner__inner {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.photo-banner__inner .brand__name {
+  font-family: var(--heading);
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 10px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+}
+
+.photo-banner__meta {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin: 0;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+.photo-banner__fineprint {
+  margin-top: clamp(20px, 4vw, 32px);
+}
+
+.photo-banner__fineprint p {
+  margin: 0 0 6px;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.78);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+.photo-banner__fineprint p:last-child {
+  margin-bottom: 0;
+}
+
+.photo-banner__credits {
+  color: rgba(255, 255, 255, 0.72);
+}
+
 .section {
   padding: clamp(56px, 8vw, 96px) 0;
   border-top: 1px solid var(--border);
@@ -745,11 +855,55 @@ section.section h2 {
   color: var(--text);
 }
 
+.prose__subhead {
+  font-family: var(--heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 1.5em 0 0.6em;
+}
+
+.name-list {
+  margin: 0 0 1em;
+  color: var(--text-muted);
+}
+
+.about__grid {
+  display: grid;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 900px) {
+  .about__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  }
+}
+
+.about__figure img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.about__figure figcaption {
+  margin-top: 14px;
+  padding-left: 4px;
+}
+
 .link-row {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 24px;
+}
+
+.link-row--center {
+  justify-content: center;
 }
 
 .cards {
@@ -995,21 +1149,6 @@ figcaption {
   box-shadow: var(--shadow-sm);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   flex: 1 1 auto;
-}
-
-.gallery__item figcaption {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  padding: 4px 10px;
-  background: rgba(20, 18, 28, 0.68);
-  color: rgba(255, 255, 255, 0.92);
-  border-radius: 999px;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  backdrop-filter: blur(4px);
-  margin: 0;
 }
 
 .gallery__item:hover img {

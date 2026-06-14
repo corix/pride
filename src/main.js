@@ -1,42 +1,80 @@
 import './style.css';
 
-/** Hero pier scene — WebP via imagetools at build/dev (source: 16125918900_12c76e5549_o.jpg). */
-import heroPhotoLg from './assets/photos/16125918900_12c76e5549_o.jpg?w=1920&format=webp&quality=78';
-import heroPhotoSm from './assets/photos/16125918900_12c76e5549_o.jpg?w=960&format=webp&quality=78';
+/** Hero — Jesse Major pier scene (original hero photo). */
+import heroPhotoLg from './assets/photos/jesse-major-pier-flag-capes.png?w=1920&format=webp&quality=78';
+import heroPhotoSm from './assets/photos/jesse-major-pier-flag-capes.png?w=960&format=webp&quality=78';
+
+/** Bottom banner — Port Angeles pier waterfront scene. */
+import bannerPhotoLg from './assets/photos/16125918900_12c76e5549_o.jpg?w=1920&format=webp&quality=78';
+import bannerPhotoSm from './assets/photos/16125918900_12c76e5549_o.jpg?w=960&format=webp&quality=78';
+
+import drone from './assets/photos/jesse-major-drone-circle.png?w=600;900;1400&format=webp&as=picture';
+import parade from './assets/photos/jesse-major-pier-parade.png?w=480;800;1200&format=webp&as=picture';
+import megaphone from './assets/photos/jesse-major-megaphone.png?w=480;800;1200&format=webp&as=picture';
+import bo from './assets/photos/jesse-major-bo.png?w=480;800;1200&format=webp&as=picture';
+import dog from './assets/photos/jesse-major-dog.png?w=480;800;1200&format=webp&as=picture';
+import panflute from './assets/photos/jesse-major-panflute.png?w=480;800;1200&format=webp&as=picture';
+import red from './assets/photos/jesse-major-red.png?w=480;800;1200&format=webp&as=picture';
+
+const photoMap = {
+  'drone-circle': { pic: drone, sizes: '(max-width: 900px) 100vw, 420px' },
+  'pier-parade': { pic: parade, sizes: '(max-width: 900px) 100vw, 340px' },
+  megaphone: { pic: megaphone, sizes: '(max-width: 900px) 100vw, 340px' },
+  bo: { pic: bo, sizes: '(max-width: 900px) 100vw, 340px' },
+  dog: { pic: dog, sizes: '(max-width: 900px) 100vw, 340px' },
+  panflute: { pic: panflute, sizes: '(max-width: 900px) 100vw, 340px' },
+  red: { pic: red, sizes: '(max-width: 900px) 100vw, 340px' },
+};
+
+document.querySelectorAll('img[data-photo]').forEach((img) => {
+  const key = img.dataset.photo;
+  const entry = photoMap[key];
+  if (!entry) return;
+  const { pic, sizes } = entry;
+  if (pic.sources?.webp) img.srcset = pic.sources.webp;
+  img.sizes = sizes;
+  img.src = pic.img.src;
+  if (pic.img.w) img.width = pic.img.w;
+  if (pic.img.h) img.height = pic.img.h;
+});
 
 const heroSection = document.querySelector('.hero');
 const heroBgEl = document.querySelector('.hero__bg');
-if (heroBgEl) {
-  const prefersSmallData = matchMedia('(prefers-reduced-data: reduce)').matches;
-  const heroUrl = prefersSmallData ? heroPhotoSm : heroPhotoLg;
-  heroBgEl.style.setProperty('--hero-photo', `url("${heroUrl}")`);
+const bannerBgEl = document.querySelector('.photo-banner__bg');
 
-  // Fade the photo in once the image is actually loaded (avoids a “pop” on refresh).
-  if (heroBgEl instanceof HTMLElement) {
-    const img = new Image();
-    img.decoding = 'async';
-    img.src = heroUrl;
-    const reveal = () => heroBgEl.classList.add('hero__bg--photo-ready');
-    if (img.complete) {
-      requestAnimationFrame(reveal);
-    } else {
-      img.addEventListener('load', reveal, { once: true });
-      img.addEventListener('error', () => {}, { once: true });
-    }
+/** Wire a CSS background photo with fade-in once loaded. */
+function wirePhotoBackground(bgEl, photoLg, photoSm) {
+  if (!(bgEl instanceof HTMLElement)) return;
+  const prefersSmallData = matchMedia('(prefers-reduced-data: reduce)').matches;
+  const photoUrl = prefersSmallData ? photoSm : photoLg;
+  bgEl.style.setProperty('--photo-bg', `url("${photoUrl}")`);
+
+  const img = new Image();
+  img.decoding = 'async';
+  img.src = photoUrl;
+  const reveal = () => bgEl.classList.add('photo-bg--ready');
+  if (img.complete) {
+    requestAnimationFrame(reveal);
+  } else {
+    img.addEventListener('load', reveal, { once: true });
+    img.addEventListener('error', () => {}, { once: true });
   }
 }
 
-/** Subtle scroll parallax on hero photo (::before); disabled when reduced motion. */
+wirePhotoBackground(heroBgEl, heroPhotoLg, heroPhotoSm);
+wirePhotoBackground(bannerBgEl, bannerPhotoLg, bannerPhotoSm);
+
+/** Subtle scroll parallax on hero photo (::after); disabled when reduced motion. */
 const reduceMotionMq = matchMedia('(prefers-reduced-motion: reduce)');
 if (heroBgEl instanceof HTMLElement && heroSection instanceof HTMLElement) {
   const parallaxStrength = 0.09;
   const syncHeroParallax = () => {
     if (reduceMotionMq.matches) {
-      heroBgEl.style.removeProperty('--hero-parallax-y');
+      heroBgEl.style.removeProperty('--photo-parallax-y');
       return;
     }
     const { top } = heroSection.getBoundingClientRect();
-    heroBgEl.style.setProperty('--hero-parallax-y', `${-top * parallaxStrength}px`);
+    heroBgEl.style.setProperty('--photo-parallax-y', `${-top * parallaxStrength}px`);
   };
   let parallaxRaf = 0;
   const onScrollOrResize = () => {
