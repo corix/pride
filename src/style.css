@@ -484,11 +484,11 @@ p:last-child {
 .hero__bg.photo-bg,
 .hero__bg.photo-bg::before,
 .hero__bg.photo-bg::after {
-  background-position: center bottom;
+  background-position: center center;
 }
 
 .hero__bg.photo-bg::after {
-  transform-origin: center bottom;
+  transform-origin: center center;
 }
 
 /* Shared photo background: gradient fallback, white wash (::before), photo (::after). */
