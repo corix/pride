@@ -18,6 +18,7 @@ import red from './assets/photos/jesse-major-red.png?w=480;800;1200&format=webp&
 import lineup from './assets/photos/2026-pride-of-pa-lineup.jpeg?w=480;800;1200&format=webp&as=picture';
 import familyActivities from './assets/photos/2026-pride-of-pa-family-activities.jpeg?w=480;800;1200&format=webp&as=picture';
 import beerGarden from './assets/photos/2026-pride-of-pa-family-beer-garden.jpeg?w=480;800;1200&format=webp&as=picture';
+import yoga from './assets/photos/2026-pride-of-pa-yoga.jpeg?w=480;800;1200&format=webp&as=picture';
 
 const photoMap = {
   'drone-circle': { pic: drone, sizes: '(max-width: 900px) 100vw, 420px' },
@@ -27,9 +28,10 @@ const photoMap = {
   dog: { pic: dog, sizes: '(max-width: 900px) 100vw, 340px' },
   panflute: { pic: panflute, sizes: '(max-width: 900px) 100vw, 340px' },
   red: { pic: red, sizes: '(max-width: 900px) 100vw, 340px' },
-  lineup: { pic: lineup, sizes: '(max-width: 720px) 100vw, 33vw' },
-  'family-activities': { pic: familyActivities, sizes: '(max-width: 720px) 100vw, 33vw' },
-  'beer-garden': { pic: beerGarden, sizes: '(max-width: 720px) 100vw, 33vw' },
+  lineup: { pic: lineup, sizes: '(max-width: 720px) 50vw, 25vw' },
+  'family-activities': { pic: familyActivities, sizes: '(max-width: 720px) 50vw, 25vw' },
+  'beer-garden': { pic: beerGarden, sizes: '(max-width: 720px) 50vw, 25vw' },
+  yoga: { pic: yoga, sizes: '(max-width: 720px) 50vw, 25vw' },
 };
 
 document.querySelectorAll('img[data-photo]').forEach((img) => {
